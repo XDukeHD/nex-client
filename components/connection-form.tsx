@@ -43,6 +43,7 @@ export function ConnectionForm({ onConnect, initialConfig }: ConnectionFormProps
 
       const response = await fetch(`http://${ip}:${portNum}/v1/websocket`, {
         method: "HEAD",
+        mode: "cors",
         signal: controller.signal,
       }).catch(() => null);
 
