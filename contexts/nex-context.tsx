@@ -117,12 +117,7 @@ export function NexProvider({ children, onLogout }: NexProviderProps) {
       return;
     }
 
-    const { token: wsToken, socket: rawSocketUrl } = credentials.data;
-
-    let socketUrl = rawSocketUrl;
-    if (typeof window !== "undefined" && window.location.protocol === "https:") {
-      socketUrl = socketUrl.replace("ws://", "wss://");
-    }
+    const { token: wsToken, socket: socketUrl } = credentials.data;
 
     try {
       if (wsRef.current) {

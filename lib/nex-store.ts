@@ -97,10 +97,5 @@ export function clearAllData(): void {
 export function getBaseUrl(): string | null {
   const config = getConnectionConfig();
   if (!config) return null;
-  
-  if (typeof window !== "undefined" && window.location.protocol === "https:") {
-    return `https://${config.ip}:${config.port}`;
-  }
-  
   return `http://${config.ip}:${config.port}`;
 }
