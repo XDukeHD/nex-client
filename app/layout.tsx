@@ -45,6 +45,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <head>
         <meta name="referrer" content="no-referrer" />
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
       </head>
       <body className="font-sans antialiased overflow-hidden">
         {children}

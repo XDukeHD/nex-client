@@ -1,6 +1,3 @@
-// NEX Local Storage Manager
-// Handles persistent storage for connection settings, auth tokens, and widget layouts
-
 const STORAGE_KEYS = {
   CONNECTION: "nex-connection",
   AUTH_TOKEN: "nex-auth-token",
@@ -22,7 +19,6 @@ export interface WidgetLayout {
   visible: boolean;
 }
 
-// Connection settings
 export function getConnectionConfig(): ConnectionConfig | null {
   if (typeof window === "undefined") return null;
   const stored = localStorage.getItem(STORAGE_KEYS.CONNECTION);
@@ -44,7 +40,6 @@ export function clearConnectionConfig(): void {
   localStorage.removeItem(STORAGE_KEYS.CONNECTION);
 }
 
-// Auth token
 export function getAuthToken(): string | null {
   if (typeof window === "undefined") return null;
   return localStorage.getItem(STORAGE_KEYS.AUTH_TOKEN);
@@ -60,7 +55,6 @@ export function clearAuthToken(): void {
   localStorage.removeItem(STORAGE_KEYS.AUTH_TOKEN);
 }
 
-// Widget layouts
 export function getWidgetLayouts(): WidgetLayout[] | null {
   if (typeof window === "undefined") return null;
   const stored = localStorage.getItem(STORAGE_KEYS.WIDGET_LAYOUT);
@@ -94,16 +88,19 @@ export function saveHiddenWidgets(widgetIds: string[]): void {
   localStorage.setItem(STORAGE_KEYS.HIDDEN_WIDGETS, JSON.stringify(widgetIds));
 }
 
-// Clear all data (logout)
 export function clearAllData(): void {
   if (typeof window === "undefined") return;
   localStorage.removeItem(STORAGE_KEYS.AUTH_TOKEN);
-  // Keep connection config for convenience
 }
 
 // API helpers
 export function getBaseUrl(): string | null {
   const config = getConnectionConfig();
   if (!config) return null;
+  
+  if (typeof window !== "undefined" && window.location.protocol === "https:") {
+    return `https://${config.ip}:${config.port}`;
+  }
+  
   return `http://${config.ip}:${config.port}`;
 }
