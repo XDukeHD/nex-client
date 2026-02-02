@@ -81,7 +81,6 @@ export function NexProvider({ children, onLogout }: NexProviderProps) {
     }
   }, []);
 
-  // Handle logout
   const handleLogout = useCallback(() => {
     if (wsRef.current) {
       wsRef.current.close(1000);
@@ -99,7 +98,6 @@ export function NexProvider({ children, onLogout }: NexProviderProps) {
     onLogout?.();
   }, [onLogout]);
 
-  // Connect to WebSocket
   const connect = useCallback(async (silent = false) => {
     if (!mountedRef.current) return;
 
@@ -122,7 +120,6 @@ export function NexProvider({ children, onLogout }: NexProviderProps) {
     const { token: wsToken, socket: socketUrl } = credentials.data;
 
     try {
-      // Close existing connection if any
       if (wsRef.current) {
         wsRef.current.close();
         wsRef.current = null;
@@ -135,7 +132,6 @@ export function NexProvider({ children, onLogout }: NexProviderProps) {
         if (!mountedRef.current) return;
         console.log("[v0] WebSocket connected, sending auth");
         
-        // Send authentication
         ws.send(JSON.stringify({
           event: "auth",
           args: [wsToken],

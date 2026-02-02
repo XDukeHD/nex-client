@@ -37,7 +37,6 @@ export function ConnectionForm({ onConnect, initialConfig }: ConnectionFormProps
 
     setIsConnecting(true);
 
-    // Test connection by trying to reach the server
     try {
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 5000);
@@ -49,13 +48,11 @@ export function ConnectionForm({ onConnect, initialConfig }: ConnectionFormProps
 
       clearTimeout(timeoutId);
 
-      // Even if we get an error response, server is reachable
       const config: ConnectionConfig = { ip, port: portNum };
       saveConnectionConfig(config);
       toast.success("Server connection saved");
       onConnect(config);
     } catch {
-      // Server might still be valid, just save and try
       const config: ConnectionConfig = { ip, port: portNum };
       saveConnectionConfig(config);
       toast.info("Connection saved - please verify credentials");
