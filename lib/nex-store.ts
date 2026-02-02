@@ -93,7 +93,6 @@ export function clearAllData(): void {
   localStorage.removeItem(STORAGE_KEYS.AUTH_TOKEN);
 }
 
-// API helpers
 export function getBaseUrl(): string | null {
   const config = getConnectionConfig();
   if (!config) return null;

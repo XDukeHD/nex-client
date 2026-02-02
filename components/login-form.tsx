@@ -42,12 +42,12 @@ export function LoginForm({ config, onLogin, onBack }: LoginFormProps) {
 
       const response = await fetch(`${baseUrl}/v1/login`, {
         method: "POST",
+        mode: "cors",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ username, password }),
       });
-
 
       if (response.status === 401) {
         toast.error("Invalid credentials", {

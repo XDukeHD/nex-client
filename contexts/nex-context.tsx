@@ -130,7 +130,6 @@ export function NexProvider({ children, onLogout }: NexProviderProps) {
 
       ws.onopen = () => {
         if (!mountedRef.current) return;
-        console.log("[v0] WebSocket connected, sending auth");
         
         ws.send(JSON.stringify({
           event: "auth",
